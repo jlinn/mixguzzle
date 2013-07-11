@@ -1,0 +1,10 @@
+# IDE files
+.idea
+*.iml
+
+# composer generated files
+composer.lock
+vendor/
+
+# test configuration file
+test_config.json

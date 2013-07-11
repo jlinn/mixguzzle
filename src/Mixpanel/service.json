@@ -1,0 +1,556 @@
+{
+    "name": "Mixpanel",
+    "apiVersion": "2013-4-19",
+    "baseUrl": "http://mixpanel.com/api/2.0/",
+    "description": "Mixpanel's data export API allows you to retrieve data which you have tracked with Mixpanel.",
+    "operations": {
+        "events": {
+            "httpMethod": "GET",
+            "uri": "events",
+            "summary": "Get unique, total, or average data for a set of events over the last N days, weeks, or months.",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "array",
+                    "description": "The event or events for which you wish to get data, encoded as a JSON array",
+                    "required": true,
+                    "filters": ["json_encode"]
+                },
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The analysis type for which you would like to get data (general, unique, or average)",
+                    "required": true
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The granularity of returned data (minute, hour, day, week, or month)",
+                    "required": true
+                },
+                "interval": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of units for which to return data, as defined by the units parameter",
+                    "required": true
+                },
+                "format": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The data return format (json or csv)",
+                    "required": false
+                }
+            }
+        },
+        "events/top": {
+            "httpMethod": "GET",
+            "uri": "events/top",
+            "summary": "Get the top events for today, with their counts and the normalized percent change from yesterday.",
+            "parameters": {
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The analysis type for which you would like to get data (general, unique, average)",
+                    "required": true
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of events to return. Defaults to 100.",
+                    "required": false
+                }
+            }
+        },
+        "events/names": {
+            "httpMethod": "GET",
+            "uri": "events/names",
+            "summary": "Get a list of the most common events over the last 31 days.",
+            "parameters": {
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The analysis type for which you would like to get data (general, unique, average)",
+                    "required": true
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of events to return. Defaults to 100.",
+                    "required": false
+                }
+            }
+        },
+        "events/properties": {
+            "httpMethod": "GET",
+            "uri": "events/properties",
+            "summary": "Get unique, total, or average data for a single event and property over the last N days, weeks, or months.",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event for which you wish to get data. This is a single event name.",
+                    "required": true
+                },
+                "name": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The name of the property for which you would like to get data.",
+                    "required": true
+                },
+                "values": {
+                    "location": "query",
+                    "type": "array",
+                    "description": "The specific property values for which you would like to get data.",
+                    "required": false,
+                    "filters": ["json_encode"]
+                },
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "Analysis type (general, unique, average).",
+                    "required": true
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "minute, hour, day, week, or month",
+                    "required": true
+                },
+                "interval": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of units for which to return data.",
+                    "required": true
+                },
+                "format": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The data return format (json or csv)",
+                    "required": false
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of values to return. Defaults to 255.",
+                    "required": false
+                }
+            }
+        },
+        "events/properties/top": {
+            "httpMethod": "GET",
+            "uri": "events/properties/top",
+            "summary": "Get the top property names for an event.",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The even for which you want to get data. This is a single event name.",
+                    "required": true
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of values to return. Defaults to 10.",
+                    "required": false
+                }
+            }
+        },
+        "events/properties/values": {
+            "httpMethod": "GET",
+            "uri": "events/properties/values",
+            "summary": "Get the top values for a property",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The even for which you want to get data. This is a single event name.",
+                    "required": true
+                },
+                "name": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The name of the property for which you would like to get data",
+                    "required": true
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of values to return. Defaults to 255.",
+                    "required": false
+                },
+                "bucket": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The specific bucket you would like to query.",
+                    "required": false
+                }
+            }
+        },
+        "funnels": {
+            "httpMethod": "GET",
+            "uri": "funnels",
+            "summary": "Get data for a funnel",
+            "parameters": {
+                "funnel_id": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The funnel for which you wish to get data.",
+                    "required": true
+                },
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which a user can begin the first step in the funnel. This date is inclusive.",
+                    "required": false
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which a user can begin the first step in the funnel. This date is inclusive.",
+                    "required": false
+                },
+                "length": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of days each user has to complete the funnel, starting from the time they triggered the first step. May not be greater than 60 days. Defaults to 14.",
+                    "required": false
+                },
+                "interval": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of days of data to put in a bucket. Defaults to 1.",
+                    "required": false
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An alternate way of specifying the interval. Can be day or week.",
+                    "required": false
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The property expression on which to segment the event.",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter events.",
+                    "required": false
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The maximum number of values to return. Defaults to 255.",
+                    "required": false
+                }
+            }
+        },
+        "funnels/list": {
+            "httpMethod": "GET",
+            "uri": "funnels/list",
+            "summary": "Get the names and funnel_ids of your funnels."
+        },
+        "segmentation": {
+            "httpMethod": "GET",
+            "uri": "segmentation",
+            "summary": "Get data for an event, segmented and filtered by properties",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event on which you wish to segment.",
+                    "required": true
+                },
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which to begin querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which to stop querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The property expression on which to segment the event.",
+                    "required": false
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "minute, hour, day, or month. Defaults to day.",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter events.",
+                    "required": false
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "Return the top X property values. This parameter is not used if 'on' is not specified.",
+                    "required": false
+                },
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The analysis type for which you would like to get data (general, unique, average)",
+                    "required": false
+                }
+            }
+        },
+        "segmentation/numeric": {
+            "httpMethod": "GET",
+            "uri": "segmentation/numeric",
+            "summary": "Get data for an event, segmented and filtered by properties, with values placed into numeric buckets",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event on which you wish to segment.",
+                    "required": true
+                },
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which to begin querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which to stop querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The property expression on which to segment the event.",
+                    "required": true
+                },
+                "buckets": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of buckets into which you wish to divide the numeric values. Bucket ranges are computed based on maximum and minimum values of the 'on' expression.",
+                    "required": true
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "minute, hour, day, or month. Defaults to day.",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter events.",
+                    "required": false
+                },
+                "type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The analysis type for which you would like to get data (general, unique, average)",
+                    "required": false
+                }
+            }
+        },
+        "segmentation/sum": {
+            "httpMethod": "GET",
+            "uri": "segmentation/sum",
+            "summary": "Sums an expression for events per unit of time.",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event on which you wish to segment.",
+                    "required": true
+                },
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which to begin querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which to stop querying event data. This date is inclusive. The date range my not be more than 30 days.",
+                    "required": true
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The expression to sum per unit of time. The result of the expression should be a numeric value.",
+                    "required": true
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "hour or day. Defaults to day.",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter events.",
+                    "required": false
+                }
+            }
+        },
+        "segmentation/average": {
+            "httpMethod": "GET",
+            "uri": "segmentation/average",
+            "summary": "Averages an expression for events per unit of time.",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event on which you wish to segment.",
+                    "required": true
+                },
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which to begin querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which to stop querying event data. This date is inclusive. The date range my not be more than 30 days.",
+                    "required": true
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The expression to sum per unit of time. The result of the expression should be a numeric value.",
+                    "required": true
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "hour or day. Defaults to day.",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter events.",
+                    "required": false
+                }
+            }
+        },
+        "retention": {
+            "httpMethod": "GET",
+            "uri": "retention",
+            "summary": "Get cohort analysis",
+            "parameters": {
+                "from_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format from which to begin querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "to_date": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The date in yyyy-mm-dd format at which to stop querying event data. This date is inclusive.",
+                    "required": true
+                },
+                "retention_type": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "birth or compounded. Defaults to birth",
+                    "required": false
+                },
+                "born_event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The first event a user must do to be counted in a birth retention cohort. Required if retention_type is 'birth'",
+                    "required": false
+                },
+                "event": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The event for which to generate returning counts. Applies to both birth and compound retention. If not specified, all events are used.",
+                    "required": false
+                },
+                "born_where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter born_events",
+                    "required": false
+                },
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter the returned events",
+                    "required": false
+                },
+                "interval": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of days into which you want your results bucketed. Default is 1 or specified by unit.",
+                    "required": false
+                },
+                "interval_count": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of intervals desired. Defaults to 1.",
+                    "required": false
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An alternate way of specifying interval and can be day, week, or month",
+                    "required": false
+                },
+                "on": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The property expression on which to segment the second event",
+                    "required": false
+                },
+                "limit": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "Return the top X segmentation values. This parameter is ignored if 'on' is not specified.",
+                    "required": false
+                }
+            }
+        },
+        "engage": {
+            "httpMethod": "GET",
+            "uri": "engage",
+            "summary": "Query people data",
+            "parameters": {
+                "where": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "An expression by which to filter people",
+                    "required": false
+                },
+                "session_id": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "A string id provided in the results of a previous query. Using as session_id speeds up the api response, and allows paging through results.",
+                    "required": false
+                },
+                "page": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "Indicates which page of results to retrieve, starting at 0. If this parameter is provided, the 'session_id' parameter is required.",
+                    "required": false
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "jlinn/mixguzzle",
+    "type": "library",
+    "description": "A PHP client library for Mixpanel's data export API using Guzzle",
+    "keywords": ["mixpanel", "guzzle", "mixpanel api", "mixguzzle"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Linn",
+            "homepage": "https://github.com/jlinn"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "guzzle/guzzle": "3.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Mixpanel\\Tests": "tests/",
+            "Mixpanel": "src/"
+        }
+    }
+}
