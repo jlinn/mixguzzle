@@ -5,11 +5,11 @@
  * Time: 11:48 AM
  */
 
-namespace Mixpanel\Tests\Command;
+namespace MixGuzzle\Tests\Command;
 
-use \Mixpanel\Tests\MixpanelTestCase;
+use \MixGuzzle\Tests\MixGuzzleTestCase;
 
-class EventsTest extends MixpanelTestCase{
+class EventsTest extends MixGuzzleTestCase{
     public function testEvents(){
         $command = $this->client->getCommand('events', array(
             'event' => array('Homepage Visit'),

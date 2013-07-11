@@ -17,7 +17,7 @@ $config = json_decode(file_get_contents($_SERVER['CONFIG']), true);
 
 \Guzzle\Tests\GuzzleTestCase::setServiceBuilder(Guzzle\Service\Builder\ServiceBuilder::factory(array(
     'test.mixpanel' => array(
-        'class' => 'Mixpanel\MixpanelClient',
+        'class' => 'MixGuzzle\MixGuzzleClient',
         'params' => $config
     )
 )));

@@ -5,12 +5,12 @@
  * Time: 11:45 AM
  */
 
-namespace Mixpanel\Tests;
+namespace MixGuzzle\Tests;
 
 
-class MixpanelTestCase extends \Guzzle\Tests\GuzzleTestCase{
+class MixGuzzleTestCase extends \Guzzle\Tests\GuzzleTestCase{
     /**
-     * @var \Mixpanel\MixpanelClient
+     * @var \MixGuzzle\MixGuzzleClient
      */
     protected $client;
 

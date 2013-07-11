@@ -5,14 +5,14 @@
  * Time: 2:49 PM
  */
 
-namespace Mixpanel\Tests;
+namespace MixGuzzle\Tests;
 
 
-class MixpanelClientTest extends \Guzzle\Tests\GuzzleTestCase {
+class MixGuzzleClientTest extends \Guzzle\Tests\GuzzleTestCase {
 
     public function testClientInstantiation(){
         /**
-         * @var \Mixpanel\MixpanelClient $client
+         * @var \MixGuzzle\MixGuzzleClient $client
          */
         $client = $this->getServiceBuilder()->get('test.mixpanel');
         $this->assertEquals('http://mixpanel.com/api/2.0/', $client->getBaseUrl());

@@ -5,14 +5,14 @@
  * Time: 12:26 PM
  */
 
-namespace Mixpanel\Plugin;
+namespace MixGuzzle\Plugin;
 
 use Guzzle\Http\Url;
 use Guzzle\Http\QueryString;
 use Guzzle\Common\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class MixpanelAuthPlugin implements EventSubscriberInterface{
+class MixGuzzleAuthPlugin implements EventSubscriberInterface{
     /**
      * @var string
      */
@@ -59,8 +59,7 @@ class MixpanelAuthPlugin implements EventSubscriberInterface{
      *
      * @api
      */
-    public static function getSubscribedEvents()
-    {
+    public static function getSubscribedEvents(){
         return array('request.before_send' => 'onRequestBeforeSend');
     }
 

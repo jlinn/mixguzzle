@@ -19,7 +19,7 @@
 
     <testsuites>
         <testsuite>
-            <directory>./tests/Mixpanel/Tests</directory>
+            <directory>./tests/MixGuzzle/Tests</directory>
         </testsuite>
     </testsuites>
 
