@@ -33,7 +33,7 @@ class MixGuzzleAuthPlugin implements EventSubscriberInterface{
      * @param string $apiSecret
      * @param int $expire
      */
-    public function __construct($apiKey, $apiSecret, $expire = 30){
+    public function __construct($apiKey, $apiSecret, $expire = 600){
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
         $this->expire = $expire;
@@ -75,18 +75,22 @@ class MixGuzzleAuthPlugin implements EventSubscriberInterface{
         $request = $event['request'];
         $params = $request->getQuery()->getAll();
         $params['api_key'] = $this->apiKey;
-        $params['expire'] = time() + $this->expire;
-        $args = $params;
-        ksort($args);   //sort args alphabetically by key
-        $signaturePieces = array();
-        foreach($args as $key => $value){
-            $signaturePieces[] = $key.'='.$value;
-        }
-        $signature = md5(implode('', $signaturePieces) . $this->apiSecret);
-        $params['sig'] = $signature;
+        $params['expire'] = (time() - date('Z')) + $this->expire; // Default 10 minutes
+
+        $params['sig'] = $this->signature($params);
         $url = Url::factory($request->getUrl())->setQuery('')->setFragment(NULL);
         $queryString = new QueryString($params);
         $request->setUrl($url.'?'.$queryString);
         return $params;
+    }
+
+    // copied from mixpanel PHP https://mixpanel.com/site_media//api/v2/mixpanel.phps
+    public function signature($params) {
+        ksort($params);
+        $param_string ='';
+        foreach ($params as $param => $value) {
+            $param_string .= $param . '=' . $value;
+        }
+        return md5($param_string . $this->apiSecret);
     }
 }
