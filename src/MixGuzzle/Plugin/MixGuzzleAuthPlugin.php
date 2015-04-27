@@ -75,7 +75,7 @@ class MixGuzzleAuthPlugin implements EventSubscriberInterface{
         $request = $event['request'];
         $params = $request->getQuery()->getAll();
         $params['api_key'] = $this->apiKey;
-        $params['expire'] = (time() - date('Z')) + $this->expire; // Default 10 minutes
+        $params['expire'] = time() + $this->expire; // Default 10 minutes
 
         $params['sig'] = $this->signature($params);
         $url = Url::factory($request->getUrl())->setQuery('')->setFragment(NULL);
