@@ -183,6 +183,18 @@
                     "type": "string",
                     "description": "The specific bucket you would like to query.",
                     "required": false
+                },
+                "unit": {
+                    "location": "query",
+                    "type": "string",
+                    "description": "The granularity of returned data (minute, hour, day, week, or month)",
+                    "required": false
+                },
+                "interval": {
+                    "location": "query",
+                    "type": "integer",
+                    "description": "The number of units for which to return data, as defined by the units parameter",
+                    "required": false
                 }
             }
         },
