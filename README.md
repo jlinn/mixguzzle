@@ -5,7 +5,7 @@ Operations are named based on their request URIs as outlined in Mixpanel's [API 
 
 ```php
 //example client instantiation and API call
-$client = Mixpanel\MixpanelClient::factory(array(
+$client = MixGuzzle\MixGuzzleClient::factory(array(
     'key' => 'your_api_key',
     'secret' => 'your_api_secret'
 ));
