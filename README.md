@@ -6,8 +6,8 @@ Operations are named based on their request URIs as outlined in Mixpanel's [API 
 ```php
 //example client instantiation and API call
 $client = MixGuzzle\MixGuzzleClient::factory(array(
-    'key' => 'your_api_key',
-    'secret' => 'your_api_secret'
+    'api_key' => 'your_api_key',
+    'api_secret' => 'your_api_secret'
 ));
 $command = $client->getCommand('events', array(
     'event' => array('Homepage Visit'),
